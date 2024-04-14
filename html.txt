@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFFLSO Alerts</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>NFFLSO Alerts</h1>
+        <form id="alertForm">
+            <label for="message">Enter alert message:</label>
+            <textarea id="message" name="message" rows="4" placeholder="Type your message here..." required></textarea>
+            <button type="submit">Send Alert</button>
+        </form>
+        <div id="alertSentMessage" class="alert"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

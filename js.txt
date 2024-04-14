@@ -1,0 +1,46 @@
+document.getElementById('alertForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var message = document.getElementById('message').value;
+    if (message.trim() !== '') {
+        sendAlert(message);
+        showNotification(message);
+    } else {
+        showAlert('Please enter a message', 'danger');
+    }
+});
+
+function sendAlert(message) {
+    // Here you would implement code to send the alert, such as through an API request
+    // For this example, we'll just display a success message on the page
+    showAlert('Alert sent: ' + message, 'success');
+    document.getElementById('message').value = ''; // Clear the message input
+}
+
+function showAlert(message, type) {
+    var alertSentMessage = document.getElementById('alertSentMessage');
+    alertSentMessage.textContent = message;
+    alertSentMessage.classList.remove('alert-success', 'alert-danger');
+    alertSentMessage.classList.add('alert-' + type);
+}
+
+function showNotification(message) {
+    if (!("Notification" in window)) {
+        // Browser doesn't support notifications
+        console.log("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+        // If it's okay let's create a notification
+        var notification = new Notification("NFFLSO Alert", {
+            body: message
+        });
+    } else if (Notification.permission !== 'denied') {
+        // Ask the user for permission
+        Notification.requestPermission().then(function (permission) {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                var notification = new Notification("NFFLSO Alert", {
+                    body: message
+                });
+            }
+        });
+    }
+}
